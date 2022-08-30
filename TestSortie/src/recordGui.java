@@ -122,7 +122,7 @@ public class recordGui {
             public void actionPerformed(ActionEvent e) {
                 //change to write to a file
 
-                File file = new File("/Users/amnwh/source/repos/Sortie.txt");
+                File file = new File("/Users/amnwh/source/repos/platypus87/CMSC495FinalProject/Sortie.txt");
                 Sortie sortie = new Sortie();
                 sortie.tailNumber = txtTailNumber.getText();
                 sortie.lineNumber = Integer.parseInt(txtLineNumber.getText());
