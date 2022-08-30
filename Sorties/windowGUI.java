@@ -1,26 +1,11 @@
 package Sorties;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.GridLayout;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+
+
 
 public class windowGUI {
 
@@ -54,22 +39,20 @@ public class windowGUI {
 	 * Create the application.
 	 * @wbp.parser.entryPoint
 	 */
-	public windowGUI() {
-		initialize();
-	}
-
+	public windowGUI() {initialize();}
 	/**
 	 * Initialize the contents of the frame.
 	 * @wbp.parser.entryPoint
 	 */
+
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 550, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBackground(Color.BLUE);
+		//comboBox.setBackground(Color.BLUE);
 		comboBox.setBounds(211, 8, 106, 20);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Flight 1", "Flight 2", "Flight 3"}));
 		frame.getContentPane().add(comboBox);
@@ -82,6 +65,9 @@ public class windowGUI {
 		JButton btnNewButton = new JButton("Save");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/*
+				This would be a good place to attempt initial "Save" operations
+				 */
 			}
 		});
 		btnNewButton.setBounds(103, 227, 89, 23);
