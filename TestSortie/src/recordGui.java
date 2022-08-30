@@ -27,11 +27,11 @@ public class recordGui {
         frame.getContentPane().add(lblTailNumber);
 
         txtTailNumber = new JTextField("eg A012");
-        txtTailNumber.setBounds(111,10,100,25);
+        txtTailNumber.setBounds(175,10,100,25);
         txtTailNumber.addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                txtTailNumber.setText("");
             }
 
             @Override
@@ -46,7 +46,7 @@ public class recordGui {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                txtTailNumber.setText("");
+
             }
 
             @Override
@@ -71,12 +71,12 @@ public class recordGui {
         lblLineNumber.setBounds(10, 40, 100, 25);
         frame.getContentPane().add(lblLineNumber);
 
-        txtLineNumber = new JTextField("Enter 3-digit number");
-        txtLineNumber.setBounds(111, 40, 100, 25);
+        txtLineNumber = new JTextField("3-digit number");
+        txtLineNumber.setBounds(175, 40, 100, 25);
         txtLineNumber.addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                txtLineNumber.setText("");
             }
 
             @Override
@@ -91,7 +91,7 @@ public class recordGui {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                txtLineNumber.setText("");
+
             }
 
             @Override
@@ -111,6 +111,185 @@ public class recordGui {
         });
         frame.getContentPane().add(txtLineNumber);
 
+        JLabel lblSchedDepart = new JLabel("Scheduled Departure: ");
+        lblSchedDepart.setFont((new Font("Tahoma", Font.BOLD, 13)));
+        lblSchedDepart.setBounds(10, 70,165,25);
+        frame.getContentPane().add(lblSchedDepart);
+
+        txtSchedDeparture = new JTextField("Julian Date/Time");
+        txtSchedDeparture.setBounds(175,70,100,25);
+        txtSchedDeparture.addMouseListener(new MouseInputListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                txtSchedDeparture.setText("");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
+        frame.getContentPane().add(txtSchedDeparture);
+
+        JLabel lblActualDepart = new JLabel("Actual Departure: ");
+        lblActualDepart.setFont((new Font("Tahoma", Font.BOLD, 13)));
+        lblActualDepart.setBounds(10, 100,165,25);
+        frame.getContentPane().add(lblActualDepart);
+
+        txtActualDeparture = new JTextField("Julian Date/Time");
+        txtActualDeparture.setBounds(175,100,100,25);
+        txtActualDeparture.addMouseListener(new MouseInputListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                txtActualDeparture.setText("");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
+        frame.getContentPane().add(txtActualDeparture);
+
+        JLabel lblSchedArrival = new JLabel("Scheduled Arrival: ");
+        lblSchedArrival.setFont((new Font("Tahoma", Font.BOLD, 13)));
+        lblSchedArrival.setBounds(10, 130,165,25);
+        frame.getContentPane().add(lblSchedArrival);
+
+        txtSchedArrival = new JTextField("Julian Date/Time");
+        txtSchedArrival.setBounds(175,130,100,25);
+        txtSchedArrival.addMouseListener(new MouseInputListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                txtSchedArrival.setText("");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
+        frame.getContentPane().add(txtSchedArrival);
+
+        JLabel lblActualArrival = new JLabel("Actual Arrival: ");
+        lblActualArrival.setFont((new Font("Tahoma", Font.BOLD, 13)));
+        lblActualArrival.setBounds(10, 160,165,25);
+        frame.getContentPane().add(lblActualArrival);
+
+        txtActualArrival = new JTextField("Julian Date/Time");
+        txtActualArrival.setBounds(175,160,100,25);
+        txtActualArrival.addMouseListener(new MouseInputListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                txtActualArrival.setText("");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
+        frame.getContentPane().add(txtActualArrival);
 
         frame.setVisible(true);
 
@@ -123,9 +302,8 @@ public class recordGui {
                 //change to write to a file
 
                 File file = new File("/Users/amnwh/source/repos/platypus87/CMSC495FinalProject/Sortie.txt");
-                Sortie sortie = new Sortie();
-                sortie.tailNumber = txtTailNumber.getText();
-                sortie.lineNumber = Integer.parseInt(txtLineNumber.getText());
+                Sortie sortie = new Sortie(txtTailNumber.getText(),Integer.parseInt(txtLineNumber.getText()),Integer.parseInt(txtSchedDeparture.getText()),Integer.parseInt(txtActualDeparture.getText()),Integer.parseInt(txtSchedArrival.getText()),Integer.parseInt(txtActualArrival.getText()));
+
                 FileWriter fr = null;
                 try{
                     fr = new FileWriter(file);
