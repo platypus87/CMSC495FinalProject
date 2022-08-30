@@ -300,9 +300,12 @@ public class recordGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //change to write to a file
-
+                DeviationGUI devGUI = new DeviationGUI();
                 File file = new File("/Users/amnwh/source/repos/platypus87/CMSC495FinalProject/Sortie.txt");
                 Sortie sortie = new Sortie(txtTailNumber.getText(),Integer.parseInt(txtLineNumber.getText()),Integer.parseInt(txtSchedDeparture.getText()),Integer.parseInt(txtActualDeparture.getText()),Integer.parseInt(txtSchedArrival.getText()),Integer.parseInt(txtActualArrival.getText()));
+                if (sortie.isDeviation()){
+                    sortie.deviationReason = devGUI.DeviationGUI();
+                }
 
                 FileWriter fr = null;
                 try{

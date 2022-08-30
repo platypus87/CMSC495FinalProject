@@ -1,8 +1,9 @@
 import java.text.MessageFormat;
 
 public class Sortie {
-    public String tailNumber, deviation;
+    public String tailNumber, deviationReason;
     public int lineNumber, scheduledDepart, actualDepart, scheduledArrival, actualArrival;
+    public boolean deviation;
 
     public Sortie(){
 
@@ -15,21 +16,24 @@ public class Sortie {
         this.actualDepart = actualDepart;
         this. scheduledArrival = scheduledArrival;
         this.actualArrival = actualArrival;
-        this.deviation = null;
+        this.deviationReason = null;
     }
-    public Sortie(String tailNumber, int lineNumber, int scheduledDepart, int actualDepart, int scheduledArrival, int actualArrival, String deviation){
+    public Sortie(String tailNumber, int lineNumber, int scheduledDepart, int actualDepart, int scheduledArrival, int actualArrival, String deviationReason){
         this.tailNumber = tailNumber;
         this.lineNumber = lineNumber;
         this.scheduledDepart = scheduledDepart;
         this.actualDepart = actualDepart;
         this. scheduledArrival = scheduledArrival;
         this.actualArrival = actualArrival;
-        this.deviation = deviation;
+        this.deviationReason = deviationReason;
     }
 
     public boolean isDeviation(){
         int arrivalTimeDifference = Math.abs(actualArrival - scheduledArrival);
         int departTimeDifference = Math.abs(actualDepart - scheduledDepart);
+
+        System.out.println(arrivalTimeDifference);
+        System.out.println(departTimeDifference);
 
         if (arrivalTimeDifference > 30){
             return true;
