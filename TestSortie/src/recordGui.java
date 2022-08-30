@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Random;
 
 public class recordGui {
     JFrame frame;
@@ -300,8 +304,12 @@ public class recordGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //change to write to a file
-                DeviationGUI devGUI = new DeviationGUI();
-                File file = new File("/Users/amnwh/source/repos/platypus87/CMSC495FinalProject/Sortie.txt");
+                  DeviationGUI devGUI = new DeviationGUI();
+//                LocalDate date = LocalDate.now();
+//                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+//                String formattedDate = date.format(formatter);
+                Random random = new Random(100000);
+                File file = new File("/Users/amnwh/source/repos/platypus87/CMSC495FinalProject/Sortie_"+random.nextInt()+".txt");
                 Sortie sortie = new Sortie(txtTailNumber.getText(),Integer.parseInt(txtLineNumber.getText()),Integer.parseInt(txtSchedDeparture.getText()),Integer.parseInt(txtActualDeparture.getText()),Integer.parseInt(txtSchedArrival.getText()),Integer.parseInt(txtActualArrival.getText()));
                 if (sortie.isDeviation()){
                     sortie.deviationReason = devGUI.DeviationGUI();
