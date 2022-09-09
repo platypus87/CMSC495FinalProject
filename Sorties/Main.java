@@ -8,14 +8,13 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					windowGUI window = new windowGUI();
-					window.frame.setVisible(true);
+					WindowGUI window = new WindowGUI();
+					window.frmSortiePlanner.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-
 
 	}
 
