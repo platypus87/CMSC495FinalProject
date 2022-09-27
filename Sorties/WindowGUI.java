@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -21,7 +24,7 @@ import javax.swing.JTextPane;
 public class WindowGUI {
 
 	JFrame frmSortiePlanner;
-	private JTextField txtdigitLine;
+	private JTextField txtDigitLine;
 	private JTextField txtAcftTailNumber;
 	private JTextField txtSchTakeoff;
 	private JTextField txtSchLanding;
@@ -29,15 +32,15 @@ public class WindowGUI {
 	private JTextField txtCrewSize;
 	private JTextField txtActualTakeoff;
 	private JTextField txtActualLanding;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
+	private JTextField txtLineNo_1;
+	private JTextField txtTailNo_1;
+	private JTextField txtSchTakeoff_1;
+	private JTextField txtSchLanding_1;
+	private JTextField txtDestination_1;
+	private JTextField txtCrewSize_1;
+	private JTextField txtActualTakeoff_1;
+	private JTextField txtActualLanding_1;
+	private JTextField txtSearch;
 	private JTextField textField_11;
 	private JTextField textField_12;
 	private JTextField textField_13;
@@ -121,12 +124,12 @@ public class WindowGUI {
 		lblActualTakeoff.setBounds(6, 217, 133, 16);
 		panelAdd.add(lblActualTakeoff);
 
-		txtdigitLine = new JTextField();
-		txtdigitLine.setToolTipText("A 3-digit number that represents the aircraft line.");
-		txtdigitLine.setText("3-Digit Line");
-		txtdigitLine.setBounds(151, 44, 130, 26);
-		panelAdd.add(txtdigitLine);
-		txtdigitLine.setColumns(10);
+		txtDigitLine = new JTextField();
+		txtDigitLine.setToolTipText("A 3-digit number that represents the aircraft line.");
+		txtDigitLine.setText("3-Digit Line");
+		txtDigitLine.setBounds(151, 44, 130, 26);
+		panelAdd.add(txtDigitLine);
+		txtDigitLine.setColumns(10);
 
 		txtAcftTailNumber = new JTextField();
 		txtAcftTailNumber.setToolTipText("The tail number of the aircraft.");
@@ -194,20 +197,20 @@ public class WindowGUI {
 		btnSaveSortie.setBounds(143, 391, 138, 29);
 		panelAdd.add(btnSaveSortie);
 
-		JLabel lblNewLabel = new JLabel("Add/Plan New Sortie");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblNewLabel.setBounds(80, 6, 400, 30);
-		panelAdd.add(lblNewLabel);
+		JLabel lblTabTitle = new JLabel("Add/Plan New Sortie");
+		lblTabTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTabTitle.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblTabTitle.setBounds(80, 6, 400, 30);
+		panelAdd.add(lblTabTitle);
 
-		JTextArea txtrEnterDescriptionOf = new JTextArea();
-		txtrEnterDescriptionOf.setText("Enter description of aircraft cargo");
-		txtrEnterDescriptionOf.setBounds(293, 72, 261, 195);
-		panelAdd.add(txtrEnterDescriptionOf);
+		JTextArea txtAdditionalInfo = new JTextArea();
+		txtAdditionalInfo.setToolTipText("Enter any additional information about sortie here");
+		txtAdditionalInfo.setBounds(293, 72, 261, 195);
+		panelAdd.add(txtAdditionalInfo);
 
-		JLabel lblNewLabel_1 = new JLabel("Cargo Description:");
-		lblNewLabel_1.setBounds(293, 49, 138, 16);
-		panelAdd.add(lblNewLabel_1);
+		JLabel lblInfoBox = new JLabel("Additional Information:");
+		lblInfoBox.setBounds(293, 49, 210, 16);
+		panelAdd.add(lblInfoBox);
 
 		JPanel panelView = new JPanel();
 		panelView.setLayout(null);
@@ -248,62 +251,62 @@ public class WindowGUI {
 		lblActualTakeoff_1.setBounds(6, 355, 133, 16);
 		panelView.add(lblActualTakeoff_1);
 
-		textField = new JTextField();
-		textField.setToolTipText("A 3-digit number that represents the aircraft line.");
-		textField.setColumns(10);
-		textField.setBounds(151, 182, 130, 26);
-		panelView.add(textField);
+		txtLineNo_1 = new JTextField();
+		txtLineNo_1.setToolTipText("A 3-digit number that represents the aircraft line.");
+		txtLineNo_1.setColumns(10);
+		txtLineNo_1.setBounds(151, 182, 130, 26);
+		panelView.add(txtLineNo_1);
 
-		textField_1 = new JTextField();
-		textField_1.setToolTipText("The tail number of the aircraft.");
-		textField_1.setColumns(10);
-		textField_1.setBounds(151, 210, 130, 26);
-		panelView.add(textField_1);
+		txtTailNo_1 = new JTextField();
+		txtTailNo_1.setToolTipText("The tail number of the aircraft.");
+		txtTailNo_1.setColumns(10);
+		txtTailNo_1.setBounds(151, 210, 130, 26);
+		panelView.add(txtTailNo_1);
 
-		textField_2 = new JTextField();
-		textField_2.setToolTipText(
+		txtSchTakeoff_1 = new JTextField();
+		txtSchTakeoff_1.setToolTipText(
 				"The expected takeoff time of the aircraft in the format YYDDD HHMM.\nYY = Last two digits of the year\nDDD = Julian date\nHHMM = Local time, 24-hour format");
-		textField_2.setColumns(10);
-		textField_2.setBounds(151, 238, 130, 26);
-		panelView.add(textField_2);
+		txtSchTakeoff_1.setColumns(10);
+		txtSchTakeoff_1.setBounds(151, 238, 130, 26);
+		panelView.add(txtSchTakeoff_1);
 
-		textField_3 = new JTextField();
-		textField_3.setToolTipText(
+		txtSchLanding_1 = new JTextField();
+		txtSchLanding_1.setToolTipText(
 				"The expected landing time of the aircraft in the format YYDDD HHMM.\nYY = Last two digits of the year\nDDD = Julian date\nHHMM = Local time, 24-hour format");
-		textField_3.setColumns(10);
-		textField_3.setBounds(151, 266, 130, 26);
-		panelView.add(textField_3);
+		txtSchLanding_1.setColumns(10);
+		txtSchLanding_1.setBounds(151, 266, 130, 26);
+		panelView.add(txtSchLanding_1);
 
-		textField_4 = new JTextField();
-		textField_4.setToolTipText("Destination airport code e.g. LAX, PDX, LON");
-		textField_4.setColumns(10);
-		textField_4.setBounds(151, 294, 130, 26);
-		panelView.add(textField_4);
+		txtDestination_1 = new JTextField();
+		txtDestination_1.setToolTipText("Destination airport code e.g. LAX, PDX, LON");
+		txtDestination_1.setColumns(10);
+		txtDestination_1.setBounds(151, 294, 130, 26);
+		panelView.add(txtDestination_1);
 
-		textField_5 = new JTextField();
-		textField_5.setToolTipText("The number of people manning the flight.");
-		textField_5.setColumns(10);
-		textField_5.setBounds(151, 322, 130, 26);
-		panelView.add(textField_5);
+		txtCrewSize_1 = new JTextField();
+		txtCrewSize_1.setToolTipText("The number of people manning the flight.");
+		txtCrewSize_1.setColumns(10);
+		txtCrewSize_1.setBounds(151, 322, 130, 26);
+		panelView.add(txtCrewSize_1);
 
 		JLabel lblActualLanding_1 = new JLabel("Actual Landing:");
 		lblActualLanding_1.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblActualLanding_1.setBounds(6, 383, 133, 16);
 		panelView.add(lblActualLanding_1);
 
-		textField_6 = new JTextField();
-		textField_6.setToolTipText(
+		txtActualTakeoff_1 = new JTextField();
+		txtActualTakeoff_1.setToolTipText(
 				"The actual takeoff time of the aircraft in the format YYDDD HHMM.\nLeave blank if not yet known - times can be finalized later.\nYY = Last two digits of the year\nDDD = Julian date\nHHMM = Local time, 24-hour format");
-		textField_6.setColumns(10);
-		textField_6.setBounds(151, 350, 130, 26);
-		panelView.add(textField_6);
+		txtActualTakeoff_1.setColumns(10);
+		txtActualTakeoff_1.setBounds(151, 350, 130, 26);
+		panelView.add(txtActualTakeoff_1);
 
-		textField_7 = new JTextField();
-		textField_7.setToolTipText(
+		txtActualLanding_1 = new JTextField();
+		txtActualLanding_1.setToolTipText(
 				"The actual landing time of the aircraft in the format YYDDD HHMM.\nLeave blank if not yet known - times can be finalized later.\nYY = Last two digits of the year\nDDD = Julian date\nHHMM = Local time, 24-hour format");
-		textField_7.setColumns(10);
-		textField_7.setBounds(151, 378, 130, 26);
-		panelView.add(textField_7);
+		txtActualLanding_1.setColumns(10);
+		txtActualLanding_1.setBounds(151, 378, 130, 26);
+		panelView.add(txtActualLanding_1);
 
 		JLabel lblTitle = new JLabel("View/Search Existing Sortie");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -311,40 +314,40 @@ public class WindowGUI {
 		lblTitle.setBounds(80, 6, 400, 30);
 		panelView.add(lblTitle);
 
-		JTextArea txtrEnterDescriptionOf_1 = new JTextArea();
-		txtrEnterDescriptionOf_1.setBounds(293, 210, 261, 195);
-		panelView.add(txtrEnterDescriptionOf_1);
+		JTextArea txtAdditionalInfo_1 = new JTextArea();
+		txtAdditionalInfo_1.setBounds(293, 210, 261, 195);
+		panelView.add(txtAdditionalInfo_1);
 
-		JLabel lblNewLabel_1_1 = new JLabel("Cargo Description:");
-		lblNewLabel_1_1.setBounds(293, 187, 138, 16);
-		panelView.add(lblNewLabel_1_1);
+		JLabel lblAdditionalInfo_1 = new JLabel("Cargo Description:");
+		lblAdditionalInfo_1.setBounds(293, 187, 138, 16);
+		panelView.add(lblAdditionalInfo_1);
 
-		textField_8 = new JTextField();
-		textField_8.setBounds(46, 88, 193, 26);
-		panelView.add(textField_8);
-		textField_8.setColumns(10);
+		txtSearch = new JTextField();
+		txtSearch.setBounds(46, 88, 193, 26);
+		panelView.add(txtSearch);
+		txtSearch.setColumns(10);
 
-		JLabel lblNewLabel_2 = new JLabel("- OR -");
-		lblNewLabel_2.setBounds(262, 81, 50, 16);
-		panelView.add(lblNewLabel_2);
+		JLabel lblOR = new JLabel("- OR -");
+		lblOR.setBounds(262, 81, 50, 16);
+		panelView.add(lblOR);
 
-		JLabel lblNewLabel_3 = new JLabel("Enter Text to Search");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setBounds(46, 70, 193, 16);
-		panelView.add(lblNewLabel_3);
+		JLabel lblSearchPrompt = new JLabel("Enter Text to Search");
+		lblSearchPrompt.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSearchPrompt.setBounds(46, 70, 193, 16);
+		panelView.add(lblSearchPrompt);
 
-		JLabel lblNewLabel_4 = new JLabel("Select a Flight From List:");
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setBounds(339, 70, 184, 16);
-		panelView.add(lblNewLabel_4);
+		JLabel lblSelectPrompt = new JLabel("Select a Flight From List:");
+		lblSelectPrompt.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSelectPrompt.setBounds(339, 70, 184, 16);
+		panelView.add(lblSelectPrompt);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(349, 89, 163, 27);
-		panelView.add(comboBox);
+		JComboBox cBoxSelect = new JComboBox();
+		cBoxSelect.setBounds(349, 89, 163, 27);
+		panelView.add(cBoxSelect);
 
-		JButton btnNewButton = new JButton("Search");
-		btnNewButton.setBounds(87, 114, 117, 29);
-		panelView.add(btnNewButton);
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setBounds(87, 114, 117, 29);
+		panelView.add(btnSearch);
 
 		JPanel panelFinalize = new JPanel();
 		tabbedPane.addTab("Finalize Times", null, panelFinalize, null);
@@ -456,5 +459,59 @@ public class WindowGUI {
 		lblActualTakeoff_1_1_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblActualTakeoff_1_1_1_2_1.setBounds(298, 263, 275, 16);
 		panelFinalize.add(lblActualTakeoff_1_1_1_2_1);
+
+		/********************************************************************************************************************
+		 * End Window building portion of class Actual functions fall below here
+		 ********************************************************************************************************************
+		 */
+
+		// First Tab "Save Sortie" button
+		btnSaveSortie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 * Try/Catch block tests input fields for correct type
+				 * 
+				 * Tests for valid form (dates, # digits, etc.) performed at set methods for
+				 * Sortie class
+				 */
+				try {
+					// int lineNo =
+					Integer.parseInt(txtDigitLine.getText());
+
+				} catch (NumberFormatException nfe) {
+					System.out.println(nfe.getMessage());
+				}
+
+				/*
+				 * Now that types have been tested for input fields, try creating sortie object
+				 * with data
+				 */
+				Sortie i = new Sortie();
+				try {
+					i.setLine(Integer.parseInt(txtDigitLine.getText()));
+					i.setTailNo(txtAcftTailNumber.getText());
+				} catch (Exception exc) {
+					System.out.println(exc.getMessage());
+				}
+				i.printSortie();
+			}
+		});
+
+		// First Tab "Clear Fields" button
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Button works");
+				txtDigitLine.setText("");
+				txtAcftTailNumber.setText("");
+				txtSchTakeoff.setText("");
+				txtSchLanding.setText("");
+				txtDestination.setText("");
+				txtCrewSize.setText("");
+				txtActualTakeoff.setText("");
+				txtActualLanding.setText("");
+				txtAdditionalInfo.setText("");
+
+			}
+		});
 	}
 }
