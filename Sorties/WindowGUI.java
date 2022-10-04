@@ -18,6 +18,7 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JSeparator;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 
@@ -47,6 +48,9 @@ public class WindowGUI {
 	private JTextField textField_14;
 	private JTextField textField_15;
 	private JTextField textField_16;
+
+	private String errorMessage;
+	private DataHandler d = new DataHandler();
 
 	/**
 	 * Launch the application.
@@ -468,32 +472,45 @@ public class WindowGUI {
 		// First Tab "Save Sortie" button
 		btnSaveSortie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				errorMessage = "<html><body width='%1s'><h1>Sortie Saving Error</h1>"; // Will store error
+																						// messages
 				/*
-				 * Try/Catch block tests input fields for correct type
+				 * If statement checks for bad input types Else block creates sortie object if
+				 * input types good
 				 * 
-				 * Tests for valid form (dates, # digits, etc.) performed at set methods for
-				 * Sortie class
 				 */
-				try {
-					// int lineNo =
-					Integer.parseInt(txtDigitLine.getText());
+				if ((!checkInt(txtDigitLine.getText()) || !checkDate(txtSchTakeoff.getText())
+						|| !checkDate(txtSchLanding.getText()) || !checkDate(txtActualTakeoff.getText())
+						|| !checkDate(txtActualLanding.getText()) || !checkInt(txtCrewSize.getText()))) {
+					infoBox(errorMessage, "Sortie Save Error");
+					System.out.println("Invalid Line");
 
-				} catch (NumberFormatException nfe) {
-					System.out.println(nfe.getMessage());
+				} else {
+					Sortie i = new Sortie();
+					try {
+						i.setLine(Integer.parseInt(txtDigitLine.getText()));
+						i.setTailNo(txtAcftTailNumber.getText());
+						i.setDepTime(Integer.parseInt((txtSchTakeoff.getText()).substring(6, 10)));
+						i.setDepDate(Integer.parseInt((txtSchTakeoff.getText()).substring(0, 5)));
+						i.setArrTime(Integer.parseInt((txtSchLanding.getText()).substring(6, 10)));
+						i.setArrDate(Integer.parseInt((txtSchLanding.getText()).substring(0, 5)));
+						i.setDepFinTime(Integer.parseInt((txtActualTakeoff.getText()).substring(6, 10)));
+						i.setDepFinDate(Integer.parseInt((txtActualTakeoff.getText()).substring(0, 5)));
+						i.setArrFinTime(Integer.parseInt((txtActualLanding.getText()).substring(6, 10)));
+						i.setArrFinDate(Integer.parseInt((txtActualLanding.getText()).substring(0, 5)));
+						i.setDestination(txtDestination.getText());
+						i.setCrewSize(Integer.parseInt(txtCrewSize.getText()));
+						i.setNotes(txtAdditionalInfo.getText());
+						d.addSortie(i);
+						d.printSorties();
+					} catch (Exception exc) {
+						// Caught a type error thrown by Sortie set method
+						infoBox("<html><body width='%1s'><h1>Field Format Error</h1>" + exc.getMessage(),
+								"Field Format Error");
+					}
+
 				}
 
-				/*
-				 * Now that types have been tested for input fields, try creating sortie object
-				 * with data
-				 */
-				Sortie i = new Sortie();
-				try {
-					i.setLine(Integer.parseInt(txtDigitLine.getText()));
-					i.setTailNo(txtAcftTailNumber.getText());
-				} catch (Exception exc) {
-					System.out.println(exc.getMessage());
-				}
-				i.printSortie();
 			}
 		});
 
@@ -513,5 +530,32 @@ public class WindowGUI {
 
 			}
 		});
+	}
+
+	// MISC METHODS USED IN SORTIE GENERATION
+
+	// Method to test fields for string
+	public boolean checkInt(String testInt) {
+		try {
+			Integer.parseInt(testInt);
+			return true;
+
+		} catch (NumberFormatException nfe) {
+			errorMessage = errorMessage + "<p>   ERROR:<br>" + nfe.getMessage() + "<br>Field must be integer<p>";
+			return false;
+		}
+	}
+
+	public boolean checkDate(String testDate) {
+		if (testDate.matches("\\d{5} \\d{4}")) {
+			return true;
+		} else {
+			errorMessage = errorMessage + "<p>   ERROR:<br>" + testDate + "<br>Field must be date format YYDDD HHMM<p>";
+			return false;
+		}
+	}
+
+	public static void infoBox(String infoMessage, String titleBar) {
+		JOptionPane.showMessageDialog(null, infoMessage, "Info: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
 	}
 }
