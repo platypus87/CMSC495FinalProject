@@ -23,23 +23,13 @@ public class Sortie {
 	private String notes; // This will be a long string allows for misc. notes about sortie
 	private String depDisNote; // Fields for notes on time discrepancies, required if discrepancy > 30 minutes
 
-	public Sortie() {
-		// The default sortie constructor
-		try {
-			setLine(911);
-			setTailNo("80301");
-			setDestination("None provided");
-			setDepDate(99001);
-			setDepTime(0001);
-			setArrDate(99001);
-			setArrTime(0001);
-			setCrewSize(0);
-			setNotes("No notes provided.");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	/**
+	 * public Sortie() { // The default sortie constructor try { setLine(911);
+	 * setTailNo("80301"); setDestination("None provided"); setDepDate(99001);
+	 * setDepTime(0001); setArrDate(99001); setArrTime(0001); setCrewSize(0);
+	 * setNotes("No notes provided."); } catch (Exception e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); } }
+	 */
 
 	// Get/Set methods for this class
 
@@ -178,10 +168,16 @@ public class Sortie {
 	}
 
 	public void printSortie() {
+		System.out.println("-------SORTIE-------");
 		System.out.println("Line: " + getLine());
 		System.out.println("Tail Number: " + getTailNo());
 		System.out.println("Destination: " + getDestination());
 		System.out.println("Departure: " + getDepDate() + " " + getDepTime());
+		System.out.println("Arrival: " + getArrDate() + " " + getArrTime());
+		System.out.println("Actual Departure: " + getDepFinDate() + " " + getDepFinTime());
+		System.out.println("Actual Arrival: " + getArrFinDate() + " " + getArrFinTime());
+		System.out.println("Crew Size: " + getCrewSize());
+		System.out.println("Notes: " + getNotes());
 	}
 
 }
