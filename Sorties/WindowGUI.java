@@ -485,6 +485,16 @@ public class WindowGUI {
 					infoBox(errorMessage, "Sortie Save Error");
 					System.out.println("Invalid Line");
 
+				} else if (timeDiscrepancy(Integer.parseInt((txtSchTakeoff.getText()).substring(6, 10)),
+						Integer.parseInt((txtActualTakeoff.getText()).substring(6, 10)))) {
+					JOptionPane.showMessageDialog(null,
+							"There is a greater than 30 minute discrepancy between scheduled and actual takeoff times.",
+							"Takeoff Discrepancy", 1);
+				} else if (timeDiscrepancy(Integer.parseInt((txtSchLanding.getText()).substring(6, 10)),
+						Integer.parseInt((txtActualLanding.getText()).substring(6, 10)))) {
+					JOptionPane.showMessageDialog(null,
+							"There is a greater than 30 minute discrepancy between scheduled and actual landing times.",
+							"Takeoff Discrepancy", 1);
 				} else {
 					Sortie i = new Sortie();
 					try {
@@ -552,6 +562,16 @@ public class WindowGUI {
 		} else {
 			errorMessage = errorMessage + "<p>   ERROR:<br>" + testDate + "<br>Field must be date format YYDDD HHMM<p>";
 			return false;
+		}
+	}
+
+	public boolean timeDiscrepancy(int time1, int time2) {
+		int discrepancy = 0;
+		discrepancy = time1 - time2;
+		if (-30 < discrepancy && discrepancy < 30) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 
