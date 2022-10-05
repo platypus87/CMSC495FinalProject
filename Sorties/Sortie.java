@@ -179,5 +179,13 @@ public class Sortie {
 		System.out.println("Crew Size: " + getCrewSize());
 		System.out.println("Notes: " + getNotes());
 	}
+		public String toString() {
+		return getLine() + ", " + getTailNo() + ", " + getDestination() + ", " + 
+				getDepDate() + ", " + getDepTime() + ", " + 
+				getArrDate() + ", " + getArrTime() + ", " + 
+				getDepFinDate() + ", " + getDepFinTime() + ", " + 
+				getArrFinDate() + ", " + getArrFinTime() + ", " + 
+				getCrewSize() + ", " + getNotes();
+	}
 
 }
