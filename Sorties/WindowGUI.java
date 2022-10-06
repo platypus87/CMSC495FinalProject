@@ -475,23 +475,58 @@ public class WindowGUI {
 				errorMessage = "<html><body width='%1s'><h1>Sortie Saving Error</h1>"; // Will store error
 																						// messages
 				/*
-				 * If statement checks for bad input types Else block creates sortie object if
-				 * input types good
+				 * These methods get pretty confusing because they are using methods within
+				 * methods
+				 * 
+				 * 
 				 * 
 				 */
+
+				// Use methods to validate all input fields for correct data type
 				if ((!checkInt(txtDigitLine.getText()) || !checkDate(txtSchTakeoff.getText())
 						|| !checkDate(txtSchLanding.getText()) || !checkDate(txtActualTakeoff.getText())
 						|| !checkDate(txtActualLanding.getText()) || !checkInt(txtCrewSize.getText()))) {
 					infoBox(errorMessage, "Sortie Save Error");
 					System.out.println("Invalid Line");
 
-				} else if (timeDiscrepancy(Integer.parseInt((txtSchTakeoff.getText()).substring(6, 10)),
-						Integer.parseInt((txtActualTakeoff.getText()).substring(6, 10)))) {
+				}
+
+				// Variables to store input data types, necessary because code got confusing
+				int line = (Integer.parseInt(txtDigitLine.getText()));
+				String tail = (txtAcftTailNumber.getText());
+				int sOutTime = (Integer.parseInt((txtSchTakeoff.getText()).substring(6, 10)));
+				int sOutDate = (Integer.parseInt((txtSchTakeoff.getText()).substring(0, 5)));
+				int sInTime = (Integer.parseInt((txtSchLanding.getText()).substring(6, 10)));
+				int sInDate = (Integer.parseInt((txtSchLanding.getText()).substring(0, 5)));
+				int aOutTime = (Integer.parseInt((txtActualTakeoff.getText()).substring(6, 10)));
+				int aOutDate = (Integer.parseInt((txtActualTakeoff.getText()).substring(0, 5)));
+				int aInTime = (Integer.parseInt((txtActualLanding.getText()).substring(6, 10)));
+				int aInDate = (Integer.parseInt((txtActualLanding.getText()).substring(0, 5)));
+				String dest = (txtDestination.getText());
+				int crew = (Integer.parseInt(txtCrewSize.getText()));
+				String notes = (txtAdditionalInfo.getText());
+
+				// Doubles to deal with times later
+				double sOut = 0;
+				double sIn = 0;
+				double aOut = 0;
+				double aIn = 0;
+
+				try {
+					sOut = timeDouble(sOutTime);
+					sIn = timeDouble(sInTime);
+					aOut = timeDouble(aOutTime);
+					aIn = timeDouble(aInTime);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				if (timeDiscrepancy(sOut, aOut, sOutDate, aOutDate)) {
 					JOptionPane.showMessageDialog(null,
 							"There is a greater than 30 minute discrepancy between scheduled and actual takeoff times.",
 							"Takeoff Discrepancy", 1);
-				} else if (timeDiscrepancy(Integer.parseInt((txtSchLanding.getText()).substring(6, 10)),
-						Integer.parseInt((txtActualLanding.getText()).substring(6, 10)))) {
+				} else if (timeDiscrepancy(sIn, aIn, sInDate, sOutDate)) {
 					JOptionPane.showMessageDialog(null,
 							"There is a greater than 30 minute discrepancy between scheduled and actual landing times.",
 							"Takeoff Discrepancy", 1);
@@ -528,14 +563,14 @@ public class WindowGUI {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Button works");
-				txtDigitLine.setText("");
-				txtAcftTailNumber.setText("");
-				txtSchTakeoff.setText("");
-				txtSchLanding.setText("");
-				txtDestination.setText("");
-				txtCrewSize.setText("");
-				txtActualTakeoff.setText("");
-				txtActualLanding.setText("");
+				txtDigitLine.setText("111");
+				txtAcftTailNumber.setText("Test");
+				txtSchTakeoff.setText("22100 0000");
+				txtSchLanding.setText("22100 0000");
+				txtDestination.setText("N/A");
+				txtCrewSize.setText("1");
+				txtActualTakeoff.setText("22100 0000");
+				txtActualLanding.setText("22100 0000");
 				txtAdditionalInfo.setText("");
 
 			}
@@ -565,14 +600,70 @@ public class WindowGUI {
 		}
 	}
 
-	public boolean timeDiscrepancy(int time1, int time2) {
-		int discrepancy = 0;
-		discrepancy = time1 - time2;
+	public boolean timeDiscrepancy(int time1, int time2, int date1, int date2) {
+		int dateDif = date2 - date1;
+		if (dateDif > 0) {
+			time2 = time2 + (dateDif * 2400);
+		} else if (dateDif < 0) {
+			time1 = time1 - (dateDif * -2400);
+		}
+		int discrepancy = time1 - time2;
 		if (-30 < discrepancy && discrepancy < 30) {
 			return false;
 		} else {
 			return true;
 		}
+	}
+
+	public boolean timeDiscrepancy(double time1, double time2, int date1, int date2) {
+		int dateDif = date2 - date1;
+		if (dateDif > 0) {
+			time2 = time2 + (dateDif * -24.0);
+		} else if (dateDif < 0) {
+			time1 = time1 - (dateDif * 24.0);
+		}
+		double discrepancy = time1 - time2;
+		if (-0.5 < discrepancy && discrepancy < 0.5) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public double timeDouble(int time) throws Exception {
+		/**
+		 * Method converts time HHMM to double For example, 1230 converts to 12.5
+		 * 
+		 * Method useful for ensuring time difference can be prepared properly
+		 */
+
+		double newTime = 0.0;
+		int minutes = time % 100;
+		int hours = (time - (time % 100)) / 100;
+		if (hours < -1 || 23 < hours) {
+			throw new Exception("Invalid time, " + time + ". Hours must be 00 - 23");
+		}
+
+		if (minutes > 59) {
+			throw new Exception("Invalid time, " + time + ", over sixty minutes. Invalid.");
+		}
+		if (minutes == 0) {
+			newTime = hours;
+		} else {
+			newTime = (minutes / 60.0);
+			newTime = newTime + hours;
+		}
+		return newTime;
+	}
+
+	public int timeInt(double time) {
+		/**
+		 * Method converts time to double Inverse of above method May not be used, but
+		 * may be important for future developments
+		 */
+		int newTime = 0;
+
+		return newTime;
 	}
 
 	public static void infoBox(String infoMessage, String titleBar) {
