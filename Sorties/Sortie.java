@@ -1,5 +1,11 @@
 package Sorties;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * This class will define 'Sortie' object Contains all data pertinent to a
  * Sortie
@@ -178,6 +184,27 @@ public class Sortie {
 		System.out.println("Actual Arrival: " + getArrFinDate() + " " + getArrFinTime());
 		System.out.println("Crew Size: " + getCrewSize());
 		System.out.println("Notes: " + getNotes());
+	}
+
+	public void saveSortie(){
+		LocalDate date = LocalDate.now();
+		LocalTime time = LocalTime.now();
+		String dateTime = ""+date.getMonth()+date.getDayOfMonth()+"_"+time.getHour()+time.getMinute();
+
+		File file = new File("./Sortie_"+dateTime+".txt");
+		FileWriter fr = null;
+		try{
+			fr = new FileWriter(file);
+			fr.write(this.toString());
+		}catch (IOException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				fr.close();
+			}catch (IOException er){
+				er.printStackTrace();
+			}
+		}
 	}
 		public String toString() {
 		return getLine() + ", " + getTailNo() + ", " + getDestination() + ", " + 

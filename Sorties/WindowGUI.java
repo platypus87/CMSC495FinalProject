@@ -511,6 +511,7 @@ public class WindowGUI {
 				double sIn = 0;
 				double aOut = 0;
 				double aIn = 0;
+				Sortie i = new Sortie();
 
 				try {
 					sOut = timeDouble(sOutTime);
@@ -531,7 +532,7 @@ public class WindowGUI {
 							"There is a greater than 30 minute discrepancy between scheduled and actual landing times.",
 							"Takeoff Discrepancy", 1);
 				} else {
-					Sortie i = new Sortie();
+
 					try {
 						i.setLine(Integer.parseInt(txtDigitLine.getText()));
 						i.setTailNo(txtAcftTailNumber.getText());
@@ -555,6 +556,8 @@ public class WindowGUI {
 					}
 
 				}
+				i.saveSortie();
+				System.out.println(i);
 
 			}
 		});
@@ -563,14 +566,14 @@ public class WindowGUI {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Button works");
-				txtDigitLine.setText("111");
-				txtAcftTailNumber.setText("Test");
-				txtSchTakeoff.setText("22100 0000");
-				txtSchLanding.setText("22100 0000");
-				txtDestination.setText("N/A");
-				txtCrewSize.setText("1");
-				txtActualTakeoff.setText("22100 0000");
-				txtActualLanding.setText("22100 0000");
+				txtDigitLine.setText("321");
+				txtAcftTailNumber.setText("123");
+				txtSchTakeoff.setText("22300 0123");
+				txtSchLanding.setText("22300 0123");
+				txtDestination.setText("22300 0123");
+				txtCrewSize.setText("3");
+				txtActualTakeoff.setText("22300 0123");
+				txtActualLanding.setText("22300 0123");
 				txtAdditionalInfo.setText("");
 
 			}
